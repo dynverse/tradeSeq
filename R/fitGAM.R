@@ -384,16 +384,16 @@ setMethod(f = "fitGAM",
             # return SingleCellExperiment object
             sc <- SingleCellExperiment(assays = list(counts = counts))
             # slingshot info
-            colData(sc)$slingshot <- DataFrame(
+            SummarizedExperiment::colData(sc)$slingshot <- S4Vector::DataFrame(
               pseudotime = pseudotime,
               cellWeights = cellWeights)
             # tradeSeq gene-level info
             df <- tibble::enframe(gamOutput$Sigma)
             colnames(df)[2] <- "Sigma"
             df$beta <- tibble::tibble(gamOutput$beta)
-            rowData(sc)$tradeSeq <- df
+            SummarizedExperiment::rowData(sc)$tradeSeq <- df
             # tradeSeq cell-level info
-            colData(sc)$tradeSeq <- tibble::tibble(X = X,
+            SummarizedExperiment::colData(sc)$tradeSeq <- tibble::tibble(X = X,
                                                     dm = dm)
             # metadata: tradeSeq knots
             metadata(sc)$tradeSeq <- list(knots = gamOutput$knotPoints)
