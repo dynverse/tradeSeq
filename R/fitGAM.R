@@ -401,7 +401,7 @@ setMethod(f = "fitGAM",
             SummarizedExperiment::colData(sc)$tradeSeq <- tibble::tibble(X = X,
                                                     dm = dm)
             # metadata: tradeSeq knots
-            SummarizedExperiment::metadata(sc)$tradeSeq <- list(knots = gamOutput$knotPoints)
+            S4Vectors::metadata(sc)$tradeSeq <- list(knots = gamOutput$knotPoints)
             return(sc)
 
           }
